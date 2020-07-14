@@ -10,6 +10,7 @@ Key achievements:
 - Used JavaScript and JSX to build out the components for the application in a modular fashion
 - Used React Router to set up routes
 - Used Axios to fetch data from my REST API
+- Utilized CORS to support cross-origin resource sharing between the REST API and the React app
 - Allowed users to sign up and use basic authentication to support users signing in
 - Programmed user-friendly messages to display when things go wrong
 - Set user credentials to persist using an HTTP cookie or local storage so that the user's authenticated state is maintained even if the application is reloaded or loaded into a new browser tab

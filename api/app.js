@@ -1,14 +1,9 @@
-/******************************************
-Treehouse Techdegree:
-FSJS project 9 - REST API
---aiming for exceeds expectations--
-******************************************/
-
 'use strict';
 
 // Load modules.
 const express = require('express');
 const morgan = require('morgan');
+const cors = require('cors');
 
 const usersRoute = require('./routes/users')
 const coursesRoute = require('./routes/courses')
@@ -21,6 +16,9 @@ const app = express();
 
 // Set up morgan which provides http request logging.
 app.use(morgan('dev'));
+
+// Enable all CORS Requests.
+app.use(cors());
 
 // Set up request body JSON parsing.
 app.use(express.json());
