@@ -1,26 +1,25 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+/******************************************
+Treehouse Techdegree:
+FSJS project 10 - Full Stack App with React and a REST API
+--aiming for exceeds expectations--
+******************************************/
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
-}
+import React, { Component } from 'react';
+import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 
-export default App;
+export default () => (
+	<Router>
+		<div>
+			{/* <HeaderWithContext /> */}
+			<h1>Hello</h1>
+			<Switch>
+				{/* <Route exact path="/" component={Public} /> */}
+				{/* <PrivateRoute path="/authenticated" component={AuthWithContext} />
+				<Route path="/signin" component={UserSignInWithContext} />
+				<Route path="/signup" component={UserSignUpWithContext} />
+				<Route path="/signout" component={UserSignOutWithContext} />
+				<Route component={NotFound} /> */}
+			</Switch>
+		</div>
+	</Router>
+);
