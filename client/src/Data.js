@@ -1,6 +1,6 @@
 import config from './config';
 
-// Data class - contains methods used to fetch data from the REST API.
+// Contains methods used to fetch data from the REST API.
 export default class Data {
 	api(path, method = 'GET', body = null, requiresAuth = false, credentials = null) {
 		const url = config.apiBaseUrl + path;
@@ -16,7 +16,7 @@ export default class Data {
 		};
 
 		if (requiresAuth) {    
-			const encodedCredentials = btoa(`${credentials.username}:${credentials.password}`);
+			const encodedCredentials = btoa(`${credentials.emailAddress}:${credentials.password}`);
 
 			options.headers['Authorization'] = `Basic ${encodedCredentials}`;
 		};
@@ -26,9 +26,10 @@ export default class Data {
 
 	// --- USER DATA --- //
 
-	// GET user credentials.
-	async getUser(username, password) {
-		const response = await this.api(`/users`, 'GET', null, true, { username, password });
+	// GET user from database.
+	async getUser(emailAddress, password) {
+		const response = await this.api(`/users`, 'GET', null, true, { emailAddress, password });
+		
 		if (response.status === 200) {
 			return response.json().then(data => data);
 		} else if (response.status === 401) {
@@ -38,9 +39,10 @@ export default class Data {
 		};
 	};
   
-	// POST new user data.
+	// POST new user to database.
 	async createUser(user) {
 		const response = await this.api('/users', 'POST', user);
+		
 		if (response.status === 201) {
 			return [];
 		} else if (response.status === 400) {
@@ -54,4 +56,50 @@ export default class Data {
 
 	// --- COURSE DATA --- //
 
+	// GET all courses from database.
+	async getCourses() {
+		const response = await this.api('/courses/', 'GET');
+		
+		if (response.status === 200) {
+			return response.json().then(data => data);
+		} else if (response.status === 401) {
+			return null;
+		} else {
+			throw new Error();
+		};
+	};
+
+	// GET a course from the database.
+	async getCourse(courseId) {
+		const response = await this.api(`/courses/${courseId}`, 'GET');
+		
+		if (response.status === 200) {
+			return response.json().then(data => data);
+		} else if (response.status === 401) {
+			return null;
+		} else {
+			throw new Error();
+		};
+	};
+
+	// POST a new course to database.
+
+	// PUT an existing course's updates in the database.
+	async updateCourse(courseId, course, emailAddress, password) {
+		const response = await this.api(`/courses/${courseId}`, 'PUT', course, true, { emailAddress, password });
+		
+		if (response.status === 204) {
+			return [];
+		} else if (response.status === 500) {
+			return null;
+		} else if (response.status === 400) {
+			return response.json().then(data => {
+				return data.errors;
+			});
+		} else {
+			throw new Error();
+		};
+	};
+
+	// DELETE a course from the database.
 }

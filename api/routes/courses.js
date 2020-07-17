@@ -20,7 +20,7 @@ router.get('/courses', asyncHandler(async (req, res) => {
 	if (courses.length > 0) {
 		res.status(200).json(courses);
 	} else {
-		res.status(404).json({ message: "No courses found." });
+		res.status(404).json({ message: 'No courses found.' });
 	};
 }));
 
@@ -40,7 +40,7 @@ router.get('/courses/:id', asyncHandler(async (req, res) => {
 	if (course) {
 		res.status(200).json(course);
 	} else {
-		res.status(404).json({ message: "Course not found." });
+		res.status(404).json({ message: 'Course not found.' });
 	};
 }));
 
@@ -82,7 +82,7 @@ router.put('/courses/:id', authenticateUser, asyncHandler(async (req, res) => {
 				if (updated) {
 					res.status(204).end();
 				} else {
-					res.status(400).json({ message: "No data entered. Please enter data to update." });
+					res.status(400).json({ message: 'No data entered. Please enter data to update.' });
 				};
 			} catch (error) {
 				if (error.name === 'SequelizeValidationError') {
@@ -95,10 +95,10 @@ router.put('/courses/:id', authenticateUser, asyncHandler(async (req, res) => {
 				};
 			};
 		} else {
-			res.status(403).json({ message: "User not authorized to make changes to this course." });
+			res.status(403).json({ message: 'User not authorized to make changes to this course.' });
 		};
 	} else {
-		res.status(404).json({ message: "Course not found." });
+		res.status(404).json({ message: 'Course not found.' });
 	};
 }));
 
@@ -117,10 +117,10 @@ router.delete('/courses/:id', authenticateUser, asyncHandler(async (req, res) =>
 			await course.destroy();
 			res.status(204).end();
 		} else {
-			res.status(403).json({ message: "User not authorized to make changes to this course." });
+			res.status(403).json({ message: 'User not authorized to make changes to this course.' });
 		};
 	} else {
-		res.status(404).json({ message: "Course not found." });
+		res.status(404).json({ message: 'Course not found.' });
 	};
 }));
 

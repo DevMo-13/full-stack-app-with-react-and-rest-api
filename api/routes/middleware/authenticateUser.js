@@ -28,7 +28,7 @@ async function authenticateUser(req, res, next) {
 				// Store the retrieved user object on the request object.
 				req.currentUser = user;
 			} else {
-				message = `Authentication failure for username: ${user.username}`;
+				message = `Authentication failure for username: ${user.emailAddress}`;
 			}
 		} else {
 			message = `User not found for username: ${credentials.name}`;

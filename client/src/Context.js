@@ -4,8 +4,8 @@ import Data from './Data';
 
 const Context = React.createContext(); 
 
-// Provider class - higher-order component (HOC) that shares functionality 
-// across the components of the app. This allows reuse of component logic and state.
+// Higher-order component (HOC) that shares functionality across the components of the app. 
+// This allows reuse of component logic and state.
 export class Provider extends Component {
 	state = {
 		authenticatedUser: Cookies.getJSON('authenticatedUser') || null
@@ -42,7 +42,7 @@ export class Provider extends Component {
 		if (user !== null) {
 			this.setState(() => {
 				return {
-				  authenticatedUser: user,
+					  authenticatedUser: user
 				};
 			});
 			
@@ -79,4 +79,4 @@ export default function withContext(Component) {
 			</Context.Consumer>
 		);
 	};
-};
+}
