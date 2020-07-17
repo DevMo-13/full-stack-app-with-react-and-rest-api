@@ -42,7 +42,7 @@ export class Provider extends Component {
 		if (user !== null) {
 			this.setState(() => {
 				return {
-					  authenticatedUser: user
+					authenticatedUser: user
 				};
 			});
 			
@@ -55,7 +55,7 @@ export class Provider extends Component {
 	signOut = () => {
 		this.setState(() => {
 			return {
-			  	authenticatedUser: null,
+				  authenticatedUser: null
 			};
 		});
 

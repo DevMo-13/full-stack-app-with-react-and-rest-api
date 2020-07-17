@@ -2,6 +2,7 @@ import config from './config';
 
 // Contains methods used to fetch data from the REST API.
 export default class Data {
+	// Makes the GET and POST requests to the REST API.
 	api(path, method = 'GET', body = null, requiresAuth = false, credentials = null) {
 		const url = config.apiBaseUrl + path;
 		const options = {
