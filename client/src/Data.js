@@ -1,4 +1,5 @@
 import config from './config';
+import Cookies from 'js-cookie';
 
 // Contains methods used to fetch data from the REST API.
 export default class Data {

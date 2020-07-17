@@ -8,7 +8,8 @@ const Context = React.createContext();
 // This allows reuse of component logic and state.
 export class Provider extends Component {
 	state = {
-		authenticatedUser: Cookies.getJSON('authenticatedUser') || null
+		authenticatedUser: Cookies.getJSON('authenticatedUser') || null,
+		unhashedPassword: Cookies.getJSON('unhashedPassword')|| null
 	};
 
 	constructor() {
@@ -17,10 +18,11 @@ export class Provider extends Component {
 	};
 
 	render() {
-		const { authenticatedUser } = this.state;
+		const { authenticatedUser, unhashedPassword } = this.state;
 
 		const value = {
 			authenticatedUser,
+			unhashedPassword,
 			data: this.data,
 			actions: {
 				signIn: this.signIn,
@@ -42,11 +44,13 @@ export class Provider extends Component {
 		if (user !== null) {
 			this.setState(() => {
 				return {
-					authenticatedUser: user
+					authenticatedUser: user,
+					unhashedPassword: password
 				};
 			});
 			
 			Cookies.set('authenticatedUser', JSON.stringify(user), { expires: 1 });
+			Cookies.set('unhashedPassword', JSON.stringify(password), { expires: 1 });
 		};
 		
 		return user;
@@ -55,11 +59,13 @@ export class Provider extends Component {
 	signOut = () => {
 		this.setState(() => {
 			return {
-				  authenticatedUser: null
+				  authenticatedUser: null,
+				  unhashedPassword: null
 			};
 		});
 
 		Cookies.remove('authenticatedUser');
+		Cookies.remove('unhashedPassword');
 	};
 }
 

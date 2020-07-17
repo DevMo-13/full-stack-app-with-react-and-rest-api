@@ -35,7 +35,7 @@ export default class UpdateCourse extends Component {
 		const { context } = this.props;
 		const authUser = context.authenticatedUser;
 		const emailAddress = authUser.emailAddress;
-		const password = authUser.password;
+		const password = context.unhashedPassword;
 		const courseId = this.props.match.params.id;
 		const { 
 			title,
