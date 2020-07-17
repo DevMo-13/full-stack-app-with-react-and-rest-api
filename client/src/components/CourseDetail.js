@@ -3,12 +3,15 @@ import { Link } from 'react-router-dom';
 import ReactMarkdown from 'react-markdown';
 
 // Retrieves and renders a course's details.
+// Only renders the Update and Delete buttons if there's an authenticated user,
+// and the authenticated user's ID matches that of the user who owns the course.
 export default class CourseDetail extends Component {
 	state ={
 		course: '',
 		user: ''
 	};
-    
+	
+	// Gets the specific course's details to save in state.
 	componentDidMount() {
 		const { context } = this.props;
 		const courseId = this.props.match.params.id;
@@ -24,6 +27,30 @@ export default class CourseDetail extends Component {
 				console.log(err);
 				this.props.history.push('/notfound');
 			});
+	};
+
+	// Deletes course data from database.
+	deleteCourse = () => {
+			const { context } = this.props;
+			const authUser = context.authenticatedUser;
+			const emailAddress = authUser.emailAddress;
+			const password = context.unhashedPassword;
+			const courseId = this.props.match.params.id;
+	
+		context.data.deleteCourse(courseId, emailAddress, password)
+			.then(errors => {
+				if (errors.length) {
+					console.log(errors);
+					this.setState({ errors });
+				} else {
+					console.log('The course is successfully deleted!');
+					this.props.history.push('/');
+				};
+			})
+			.catch(err => {
+				console.log(err);
+				this.props.history.push('/error')
+			});	
 	};
 
     render() {
@@ -44,8 +71,8 @@ export default class CourseDetail extends Component {
 							<div className='grid-100'>
 								<span>
 									<Link className='button' to={`${course.id}/update`}>Update Course</Link>
-									<Link className='button' to={'/'}>Delete Course</Link>
-									<Link className='button button-secondary' to='/'>Return to List</Link>
+									<button className='button' onClick={this.deleteCourse}>Delete Course</button>
+									<Link className='button button-secondary' to={'/'}>Return to List</Link>
 								</span>
 							</div>
 						</div>
@@ -55,7 +82,7 @@ export default class CourseDetail extends Component {
 						<div className='bounds'>
 							<div className='grid-100'>
 								<span>
-								<Link className='button button-secondary' to='/'>Return to List</Link>
+								<Link className='button button-secondary' to={'/'}>Return to List</Link>
 								</span>
 							</div>
 						</div>

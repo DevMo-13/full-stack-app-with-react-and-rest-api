@@ -1,11 +1,9 @@
-import config from './config';
-import Cookies from 'js-cookie';
 
 // Contains methods used to fetch data from the REST API.
 export default class Data {
-	// Makes the GET and POST requests to the REST API.
+	// Makes the requests to the REST API.
 	api(path, method = 'GET', body = null, requiresAuth = false, credentials = null) {
-		const url = config.apiBaseUrl + path;
+		const url = 'http://localhost:5000/api' + path;
 		const options = {
 			method,
 			headers: {
@@ -60,7 +58,7 @@ export default class Data {
 
 	// GET all courses from database.
 	async getCourses() {
-		const response = await this.api('/courses/', 'GET');
+		const response = await this.api('/courses', 'GET');
 		
 		if (response.status === 200) {
 			return response.json().then(data => data);
@@ -85,6 +83,17 @@ export default class Data {
 	};
 
 	// POST a new course to database.
+	async createCourse(course, emailAddress, password) {
+		const response = await this.api('/courses', 'POST', course, true, { emailAddress, password });
+		
+		if (response.status === 201) {
+			return [];
+		} else if (response.status === 400) {
+			return response.json().then(data => data);
+		} else {
+			throw new Error();
+		};
+	};
 
 	// PUT an existing course's updates in the database.
 	async updateCourse(courseId, course, emailAddress, password) {
@@ -95,13 +104,24 @@ export default class Data {
 		} else if (response.status === 500) {
 			return null;
 		} else if (response.status === 400) {
-			return response.json().then(data => {
-				return data.errors;
-			});
+			return response.json().then(data => data);
 		} else {
 			throw new Error();
 		};
 	};
 
 	// DELETE a course from the database.
+	async deleteCourse(courseId, emailAddress, password) {
+		const response = await this.api(`/courses/${courseId}`, 'DELETE', null, true, { emailAddress, password });
+		
+		if (response.status === 204) {
+			return [];
+		} else if (response.status === 500) {
+			return null;
+		} else if (response.status === 400) {
+			return response.json().then(data => data);
+		} else {
+			throw new Error();
+		};
+	};
 }

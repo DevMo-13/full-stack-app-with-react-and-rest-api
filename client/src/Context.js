@@ -37,7 +37,7 @@ export class Provider extends Component {
 		);
 	};
 
-  
+	// Updates the authenticatedUser and unshashedPassword states upon sign in, and sets cookies.
 	signIn = async (emailAddress, password) => {
 		const user = await this.data.getUser(emailAddress, password);
 		
@@ -56,6 +56,8 @@ export class Provider extends Component {
 		return user;
 	};
 
+	// Removes authenticatedUser and unshashedPassword properties from state and removes their cookies.
+	// User is no longer authenticated and cannot view the private components.
 	signOut = () => {
 		this.setState(() => {
 			return {
@@ -76,7 +78,6 @@ export const Consumer = Context.Consumer;
  * @param {class} Component - A React component.
  * @returns {function} A higher-order component.
  */
-
 export default function withContext(Component) {
 	return function ContextComponent(props) {
 		return (

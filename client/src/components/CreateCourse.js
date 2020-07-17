@@ -1,0 +1,167 @@
+import React, { Component } from 'react';
+
+// Allows user to create a new course.
+export default class CreateCourse extends Component {
+	state ={
+		title: '',
+		description: '',
+		estimatedTime: '',
+		materialsNeeded: '',
+		userId: '',
+		errors: []
+	};
+
+	// Gets the authUser's id to save in state.
+	componentDidMount() {
+		const { context } = this.props;
+		const authUser = context.authenticatedUser;
+
+		this.setState({ 
+			userId: authUser.id
+		});
+	};
+
+	// Saves new course data to database on submit.
+	submit = (event) => {
+		event.preventDefault();
+
+		const { context } = this.props;
+		const authUser = context.authenticatedUser;
+		const emailAddress = authUser.emailAddress;
+		const password = context.unhashedPassword;
+		const { 
+			title,
+			description,
+			estimatedTime,
+			materialsNeeded,
+			userId
+		} = this.state;
+		const course = {
+			title,
+			description,
+			estimatedTime,
+			materialsNeeded,
+			userId
+		};
+
+		context.data.createCourse(course, emailAddress, password)
+			.then(errors => {
+				if (errors.length) {
+					console.log(errors);
+					this.setState({ errors });
+				} else {
+					console.log(`${title} is successfully added!`);
+					this.props.history.push('/');    
+				};
+			})
+			.catch(err => {
+				console.log(err);
+				this.props.history.push('/error')
+			});
+	};
+
+	// Saves input data to state.
+	change = (event) => {
+		const name = event.target.name;
+		const value = event.target.value;
+
+		this.setState(() => {
+			return {
+				[name]: value
+			};
+		});
+	};
+
+	// Redirects user to the default route.
+	cancel = (event) => {
+		event.preventDefault();
+		this.props.history.push('/');
+	};
+
+    render() {
+		const { 
+			title,
+			description,
+			estimatedTime,
+			materialsNeeded,
+			errors
+		} = this.state;
+		const { context } = this.props;
+		const authUser = context.authenticatedUser;
+
+		return (
+			<React.Fragment>
+				<hr></hr>
+					<div className='bounds course--detail'>
+						<h1>Create Course</h1>
+						<div>
+							<form onSubmit={this.submit}>
+								<div className='grid-66'>
+									<div className='course--header'>
+										<h4 className='course--label'>Course</h4>
+										<div>
+											<input 
+												id='title' 
+												name='title' 
+												type='text' 
+												className='input-title course--title--input' 
+												placeholder='Course title...'
+                    							value={title}
+												onChange={this.change} />
+										</div>
+										<p>By {authUser.firstName} {authUser.lastName}</p>
+									</div>
+									<div className='course--description'>
+										<div>
+											<textarea 
+												id='description' 
+												name='description' 
+												className='' 
+												placeholder='Course description...'
+												value={description}
+												onChange={this.change} />
+										</div>
+									</div>
+								</div>
+								<div className='grid-25 grid-right'>
+									<div className='course--stats'>
+										<ul className='course--stats--list'>
+											<li className='course--stats--list--item'>
+												<h4>Estimated Time</h4>
+												<div>
+													<input 
+														id='estimatedTime' 
+														name='estimatedTime' 
+														type='text' 
+														className='course--time--input'
+                        								placeholder='Hours' 
+														value={estimatedTime}
+														onChange={this.change} />
+												</div>
+											</li>
+											<li className='course--stats--list--item'>
+												<h4>Materials Needed</h4>
+												<div>
+													<textarea 
+														id='materialsNeeded' 
+														name='materialsNeeded' 
+														className='' 
+														placeholder='List materials...'
+														value={materialsNeeded}
+														onChange={this.change}  />
+												</div>
+											</li>
+										</ul>
+									</div>
+								</div>
+								<div className='grid-100 pad-bottom'>
+									<button className='button' type='submit'>Create Course</button>
+									<button className='button button-secondary' onClick={this.cancel}>Cancel</button>
+								</div>
+							</form>
+						</div>
+					</div>
+			</React.Fragment>
+		);
+    };
+}

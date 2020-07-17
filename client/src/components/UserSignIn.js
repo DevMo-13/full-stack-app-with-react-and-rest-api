@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 
-// Allows a user to sign in.
+// Allows a user to sign in with proper credentials.
 export default class UserSignIn extends Component {
 	state = {
 		emailAddress: '',
@@ -9,6 +9,7 @@ export default class UserSignIn extends Component {
 		errors: []
 	}
 
+	// Saves input data to state.
 	change = (event) => {
 		const name = event.target.name;
 		const value = event.target.value;
@@ -20,6 +21,7 @@ export default class UserSignIn extends Component {
 		});
 	};
 
+	// Signs a user in on submit.
 	submit = (event) => {
 		event.preventDefault();
 
@@ -47,6 +49,7 @@ export default class UserSignIn extends Component {
 			})
 	};
 
+	// Redirects user to the default route.
 	cancel = (event) => {
 		event.preventDefault();
 		this.props.history.push('/');

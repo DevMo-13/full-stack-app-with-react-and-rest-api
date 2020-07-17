@@ -12,6 +12,7 @@ export default class UserSignUp extends Component {
 		errors: [],
 	};
 
+	// Saves input data to state.
 	change = (event) => {
 		const name = event.target.name;
 		const value = event.target.value;
@@ -23,6 +24,7 @@ export default class UserSignUp extends Component {
 		});
 	};
 
+	// Saves new user data to database on submit.
 	submit = (event) => {
 		event.preventDefault();
 
@@ -61,6 +63,7 @@ export default class UserSignUp extends Component {
 			});
 	};
 
+	// Redirects user to the default route.
 	cancel = (event) => {
 		event.preventDefault();
 		this.props.history.push('/');

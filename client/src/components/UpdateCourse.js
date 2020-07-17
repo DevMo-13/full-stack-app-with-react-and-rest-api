@@ -9,7 +9,8 @@ export default class UpdateCourse extends Component {
 		materialsNeeded: '',
 		errors: []
 	};
-    
+	
+	// Gets the specific course's details to save in state.
 	componentDidMount() {
 		const { context } = this.props;
 		const courseId = this.props.match.params.id;
@@ -29,6 +30,7 @@ export default class UpdateCourse extends Component {
 			});
 	};
 
+	// Updates course's data on submit.
 	submit = (event) => {
 		event.preventDefault();
 
@@ -66,6 +68,7 @@ export default class UpdateCourse extends Component {
 			});
 	};
 
+	// Saves input data to state.
 	change = (event) => {
 		const name = event.target.name;
 		const value = event.target.value;
@@ -77,11 +80,10 @@ export default class UpdateCourse extends Component {
 		});
 	};
 
+	// Redirects user to the CourseDetail route.
 	cancel = (event) => {
 		event.preventDefault();
-
 		const courseId = this.props.match.params.id;
-
 		this.props.history.push(`/courses/${courseId}`);
 	};
 
@@ -113,7 +115,7 @@ export default class UpdateCourse extends Component {
 												type='text' 
 												className='input-title course--title--input' 
 												placeholder='Course title...'
-                    							value={`${title}`}
+                    							value={title}
 												onChange={this.change} />
 										</div>
 										<p>By {authUser.firstName} {authUser.lastName}</p>
@@ -125,7 +127,7 @@ export default class UpdateCourse extends Component {
 												name='description' 
 												className='' 
 												placeholder='Course description...'
-												value={`${description}`}
+												value={description}
 												onChange={this.change} />
 										</div>
 									</div>
@@ -142,7 +144,7 @@ export default class UpdateCourse extends Component {
 														type='text' 
 														className='course--time--input'
                         								placeholder='Hours' 
-														value={`${estimatedTime}`}
+														value={estimatedTime}
 														onChange={this.change} />
 												</div>
 											</li>
@@ -154,7 +156,7 @@ export default class UpdateCourse extends Component {
 														name='materialsNeeded' 
 														className='' 
 														placeholder='List materials...'
-														value={`${materialsNeeded}`}
+														value={materialsNeeded}
 														onChange={this.change}  />
 												</div>
 											</li>
