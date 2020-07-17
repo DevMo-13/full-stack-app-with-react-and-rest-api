@@ -8,15 +8,18 @@ import React from 'react';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 
 import Header from './components/Header';
-import UserSignUp from './components/UserSignUp';
-import UserSignIn from './components/UserSignIn';
-import UserSignOut from './components/UserSignOut';
-import Courses from './components/Courses';
-import CourseDetail from './components/CourseDetail';
-import CreateCourse from './components/CreateCourse';
-import UpdateCourse from './components/UpdateCourse';
-
+import UserSignUp from './components/user/UserSignUp';
+import UserSignIn from './components/user/UserSignIn';
+import UserSignOut from './components/user/UserSignOut';
+import Courses from './components/course/Courses';
+import CourseDetail from './components/course/CourseDetail';
+import CreateCourse from './components/course/CreateCourse';
+import UpdateCourse from './components/course/UpdateCourse';
+import PrivateRoute from './PrivateRoute';
 import withContext from './Context';
+import Forbidden from './components/Forbidden';
+import NotFound from './components/NotFound';
+import UnhandledError from './components/UnhandledError';
 
 // Connect the components to context.
 const HeaderWithContext = withContext(Header);
@@ -34,14 +37,17 @@ export default () => (
 			<HeaderWithContext />
 			<Switch>
 				<Route exact path='/' component={CoursesWithContext}/>
+				<PrivateRoute exact path='/create' component={CreateCourseWithContext}/>
 				<Route exact path='/courses/:id' component={CourseDetailWithContext}/>
-				<Route exact path='/courses/:id/update' component={UpdateCourseWithContext}/>
-				<Route exact path='/create' component={CreateCourseWithContext}/>
-				{/* <PrivateRoute path='/authenticated' component={AuthWithContext} /> */}
-				<Route path='/signin' component={UserSignInWithContext} />
+				<PrivateRoute exact path='/courses/:id/update' component={UpdateCourseWithContext}/>
+
 				<Route path='/signup' component={UserSignUpWithContext} />
+				<Route path='/signin' component={UserSignInWithContext} />
 				<Route path='/signout' component={UserSignOutWithContext} />
-				{/* <Route component={NotFound} /> */}
+
+				<Route path='/forbidden' component={Forbidden} />
+				<Route path='/error' component={UnhandledError} />
+				<Route component={NotFound} />
 			</Switch>
 		</div>
 	</Router>
