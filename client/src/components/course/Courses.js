@@ -9,14 +9,14 @@ export default class Courses extends Component {
 	
 	// Gets all course data to save in state.
 	componentDidMount() {
-
 		const { context } = this.props;
 		
 		context.data.getCourses()
 			.then(courses => {
 				this.setState({ courses })
 			})
-			.catch(() => {
+			.catch((error) => {
+				console.log(error);
 				this.props.history.push('/notfound');
 			});
 	};

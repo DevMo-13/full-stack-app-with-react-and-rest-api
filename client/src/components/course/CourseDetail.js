@@ -23,12 +23,13 @@ export default class CourseDetail extends Component {
 					user: course.user
 				});
 			})
-			.catch(() => {
+			.catch((error) => {
+				console.log(error);
 				this.props.history.push('/notfound');
 			});
 	};
 
-	// Deletes course data from database.
+	// Deletes course data from the database.
 	deleteCourse = () => {
 		const { context } = this.props;
 		const authUser = context.authenticatedUser;
@@ -39,15 +40,13 @@ export default class CourseDetail extends Component {
 		context.data.deleteCourse(courseId, emailAddress, password)
 			.then(error => {
 				if (error.length) {
-					console.log(error);
 					this.props.history.push('/forbidden');
 				} else {
 					console.log('The course is successfully deleted!');
 					this.props.history.push('/');
 				};
 			})
-			.catch(err => {
-				console.log(err);
+			.catch(() => {
 				this.props.history.push('/error')
 			});	
 	};

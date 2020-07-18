@@ -1,18 +1,20 @@
 import React, { Component } from 'react';
 import ErrorsDisplay from '../ErrorsDisplay';
+import Forbidden from '../Forbidden';
 
 // Retrieves course's details and updates any changes made by user.
+// If user is not the owner of the course, user is redirected to the forbidden route.
 export default class UpdateCourse extends Component {
 	state ={
 		title: '',
 		description: '',
 		estimatedTime: '',
 		materialsNeeded: '',
+		courseUser: '',
 		errors: []
 	};
 	
-	// Gets the specific course's details to save in state,
-	// but only if current authUser is the owner of the course.
+	// Gets the specific course's details to save in state.
 	componentDidMount() {
 		const { context } = this.props;
 		const courseId = this.props.match.params.id;
@@ -24,9 +26,11 @@ export default class UpdateCourse extends Component {
 					description: course.description,
 					estimatedTime: course.estimatedTime,
 					materialsNeeded: course.materialsNeeded,
+					courseUser: course.user
 				});
 			})
-			.catch(() => {
+			.catch((error) => {
+				console.log(error);
 				this.props.history.push('/notfound');
 			});
 	};
@@ -69,20 +73,19 @@ export default class UpdateCourse extends Component {
 		context.data.updateCourse(courseId, course, emailAddress, password)
 			.then(error => {
 				if (error.length) {
-					console.log(error);
 					this.setState({ errors: error });
 				} else {
 					console.log(`${title} has been successfully updated!`);
 					this.props.history.push(`/courses/${courseId}`);  
 				};
 			})
-			.catch(err => {
-				console.log(err);
+			.catch((error) => {
+				console.log(error);
 				this.props.history.push('/error')
 			});
 	};
 
-	// Redirects user to the CourseDetail route.
+	// Redirects user to the course detail route.
 	cancel = (event) => {
 		event.preventDefault();
 		const courseId = this.props.match.params.id;
@@ -95,6 +98,7 @@ export default class UpdateCourse extends Component {
 			description,
 			estimatedTime,
 			materialsNeeded,
+			courseUser,
 			errors
 		} = this.state;
 		const { context } = this.props;
@@ -103,6 +107,7 @@ export default class UpdateCourse extends Component {
 		return (
 			<React.Fragment>
 				<hr></hr>
+				{authUser.id === courseUser.id ?
 					<div className='bounds course--detail'>
 						<h1>Update Course</h1>
 						<ErrorsDisplay errors={errors} />
@@ -173,6 +178,9 @@ export default class UpdateCourse extends Component {
 							</form>
 						</div>
 					</div>
+				:
+					<Forbidden />
+				}
 			</React.Fragment>
 		);
     };

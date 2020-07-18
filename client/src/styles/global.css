@@ -226,11 +226,11 @@ body {
 }
 
 #header {
-	color: #fff;
+  color: #fff;
 }
 
 #header:hover {
-	color: rgba(255, 255, 255, 0.5);
+  color: rgba(255, 255, 255, 0.5);
 }
 
 /* line 25, ../sass/global.sass */
@@ -265,8 +265,8 @@ body {
 
 /* line 44, ../sass/global.sass */
 .actions--bar {
-  border-bottom: 1px solid #d5f9fe;
-  background: #f8feff;
+  border-bottom: 1px solid #B7C9C1;
+  background: #D8E7E1;
   padding: 20px 0;
   margin-top: -30px;
 }
@@ -444,14 +444,14 @@ p {
 }
 /* line 167, ../sass/global.sass */
 .course--header .course--title {
-  font-size: 48px;
+  font-size: 45px;
   margin-bottom: 15px;
   color: #4F6C85;
 }
 /* line 171, ../sass/global.sass */
 .course--header p {
   font-size: 18px;
-  color: #657F95;
+  color: #999;
   font-weight: 100;
 }
 /* line 176, ../sass/global.sass */
@@ -608,7 +608,7 @@ textarea {
   font-size: 16px;
   margin: 0 0 20px;
   border: 1px solid #94A9BC;
-  color: #666;
+  color: #B7C9C1;
   line-height: 1.8;
   outline: none;
   font-family: "Cousine";
@@ -642,7 +642,7 @@ textarea:focus {
 /* line 488, ../sass/global.sass */
 input {
   width: 100%;
-  color: #4F6C85;
+  color: #B7C9C1;
   border-radius: 8px;
   border: 1px solid #94A9BC;
   padding: 15px;
@@ -714,7 +714,7 @@ input:focus {
 }
 /* line 522, ../sass/global.sass */
 .button:not(.button-secondary):hover {
-  background: #4F6C85;
+  background: #B7C9C1;
 }
 
 /* line 525, ../sass/global.sass */
@@ -730,8 +730,8 @@ input:focus {
 }
 /* line 530, ../sass/global.sass */
 .button-secondary:hover {
-  color: #4F6C85;
-  box-shadow: 0 0 0 2px #4F6C85 inset;
+  color: #B7C9C1;
+  box-shadow: 0 0 0 2px #B7C9C1 inset;
 }
 
 /* adds additional padding to the bottom of an element */

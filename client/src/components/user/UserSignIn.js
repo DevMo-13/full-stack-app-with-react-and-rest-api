@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
+import ErrorsDisplay from '../ErrorsDisplay';
 
 // Allows a user to sign in with proper credentials.
 export default class UserSignIn extends Component {
@@ -21,7 +22,7 @@ export default class UserSignIn extends Component {
 		});
 	};
 
-	// Signs a user in on submit.
+	// Signs a user in on submit, or displays errors.
 	submit = (event) => {
 		event.preventDefault();
 
@@ -43,8 +44,8 @@ export default class UserSignIn extends Component {
 					this.props.history.push(from);
 				}
 			})
-			.catch(err => {
-				console.log(err);
+			.catch((error) => {
+				console.log(error);
 				this.props.history.push('/error');
 			})
 	};
@@ -66,11 +67,7 @@ export default class UserSignIn extends Component {
 			<div className='bounds'>
 				<div className='grid-33 centered signin'>
 					<h1>Sign In</h1>
-					<div className="validation-errors">
-						<ul>
-							{errors.map((error, i) => <li key={i}>{error}</li>)}
-						</ul>
-					</div>
+					<ErrorsDisplay errors={errors} />
 					<div>
 						<form onSubmit={this.submit}>
 							<div>

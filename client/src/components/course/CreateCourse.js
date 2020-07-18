@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import ErrorsDisplay from '../ErrorsDisplay';
 
-// Allows user to create a new course.
+// Allows user to create a new course, if user is signed in and authenticated.
 export default class CreateCourse extends Component {
 	state ={
 		title: '',
@@ -61,15 +61,14 @@ export default class CreateCourse extends Component {
 		context.data.createCourse(course, emailAddress, password)
 			.then(error => {
 				if (error.length) {
-					console.log(error);
 					this.setState({ errors: error });
 				} else {
 					console.log(`${title} is successfully added!`);
 					this.props.history.push('/');    
 				};
 			})
-			.catch(err => {
-				console.log(err);
+			.catch((error) => {
+				console.log(error);
 				this.props.history.push('/error')
 			});
 	};

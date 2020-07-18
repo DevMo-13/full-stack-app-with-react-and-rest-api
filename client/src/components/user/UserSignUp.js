@@ -65,7 +65,6 @@ export default class UserSignUp extends Component {
 		context.data.createUser(user)
 			.then(error => {
 				if (error.length) {
-					console.log(error);
 					this.setState({ errors: error });
 				} else {
 					console.log(`${emailAddress} is successfully signed up and authenticated!`);
@@ -75,8 +74,8 @@ export default class UserSignUp extends Component {
 						});
 				};
 			})
-			.catch(err => {
-				console.log(err);
+			.catch((error) => {
+				console.log(error);
 				this.props.history.push('/error')
 			});
 	};
