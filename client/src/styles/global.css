@@ -207,22 +207,32 @@ body {
 
 /* line 13, ../sass/global.sass */
 .header {
-  background: #57496e;
+  background: #657F95;
   padding: 20px 0;
   margin-bottom: 30px;
 }
 /* line 17, ../sass/global.sass */
 .header--logo {
   color: #fff;
-  font-size: 24px;
+  font-size: 30px;
   padding: 0 15px;
   margin: 0;
   display: inline-block;
+  text-transform: uppercase;
 }
 /* line 23, ../sass/global.sass */
 .header--logo a {
   color: rgba(255, 255, 255, 0.5);
 }
+
+#header {
+	color: #fff;
+}
+
+#header:hover {
+	color: rgba(255, 255, 255, 0.5);
+}
+
 /* line 25, ../sass/global.sass */
 .header--logo a:hover {
   color: #fff;
@@ -282,7 +292,7 @@ h1 {
 
 /* line 61, ../sass/global.sass */
 a {
-  color: #7c689b;
+  color: #657F95;
   cursor: pointer;
   text-decoration: none;
   -webkit-transition: color 0.2s;
@@ -339,7 +349,7 @@ p {
 
 /* line 102, ../sass/global.sass */
 .course--module {
-  background: #7c689b;
+  background: #657F95;
   border-radius: 8px;
   padding: 30px;
   margin-bottom: 30px;
@@ -376,6 +386,7 @@ p {
 .course--title {
   font-size: 18px;
   color: #fff;
+  text-transform: uppercase;
 }
 /* line 126, ../sass/global.sass */
 .course--link {
@@ -429,22 +440,23 @@ p {
 .course--header .course--label {
   font-size: 18px;
   color: #999;
+  text-transform: uppercase;
 }
 /* line 167, ../sass/global.sass */
 .course--header .course--title {
   font-size: 48px;
   margin-bottom: 15px;
-  color: #332a40;
+  color: #4F6C85;
 }
 /* line 171, ../sass/global.sass */
 .course--header p {
   font-size: 18px;
-  color: #b1a5c4;
+  color: #657F95;
   font-weight: 100;
 }
 /* line 176, ../sass/global.sass */
 .course--title--input {
-  font-size: 48px;
+  font-size: 30px;
   font-weight: bold;
   font-family: "Work Sans", sans-serif;
 }
@@ -472,7 +484,7 @@ p {
   position: relative;
   padding-left: 30px;
   padding: 30px 0 30px 5%;
-  border-top: 1px solid #ccc;
+  border-top: 1px solid #94A9BC;
   font-size: 16px;
   line-height: 1.8;
   font-family: "Cousine";
@@ -543,7 +555,7 @@ p {
   font-family: "Cousine";
   font-weight: 100;
   color: #999;
-  font-size: 14px;
+  font-size: 18px;
   padding: 0 0 10px;
   margin-bottom: 10px;
   border-bottom: 1px solid #ddd;
@@ -555,8 +567,9 @@ p {
 }
 /* line 300, ../sass/global.sass */
 .course--stats--list h3 {
-  font-family: "Work Sans", sans-serif;
-  font-size: 18px;
+  font-family: "Cousine", sans-serif;
+  font-size: 15px;
+  font-weight: 100;
 }
 /* line 303, ../sass/global.sass */
 .course--stats--list > li {
@@ -574,7 +587,7 @@ p {
 /* line 311, ../sass/global.sass */
 .course--time--input {
   font-family: "Work Sans", sans-serif;
-  font-size: 18px;
+  font-size: 16px;
   font-weight: bold;
   margin: 0;
 }
@@ -594,7 +607,7 @@ textarea {
   padding: 15px;
   font-size: 16px;
   margin: 0 0 20px;
-  border: 1px solid #ccc4d8;
+  border: 1px solid #94A9BC;
   color: #666;
   line-height: 1.8;
   outline: none;
@@ -623,15 +636,15 @@ textarea:-ms-input-placeholder {
 }
 /* line 485, ../sass/global.sass */
 textarea:focus {
-  border-color: #7c689b;
+  border-color: #657F95;
 }
 
 /* line 488, ../sass/global.sass */
 input {
   width: 100%;
-  color: #332a40;
+  color: #4F6C85;
   border-radius: 8px;
-  border: 1px solid #ccc4d8;
+  border: 1px solid #94A9BC;
   padding: 15px;
   margin-bottom: 15px;
   outline: none;
@@ -656,7 +669,7 @@ input:-ms-input-placeholder {
 }
 /* line 500, ../sass/global.sass */
 input:focus {
-  border-color: #7c689b;
+  border-color: #4F6C85;
 }
 
 /* line 29, ../sass/mixins.sass */
@@ -678,7 +691,7 @@ input:focus {
 
 /* line 507, ../sass/global.sass */
 .button {
-  background: #7c689b;
+  background: #657F95;
   color: #fff;
   font-family: "Work Sans", sans-serif;
   font-size: 18px;
@@ -701,14 +714,14 @@ input:focus {
 }
 /* line 522, ../sass/global.sass */
 .button:not(.button-secondary):hover {
-  background: #63537d;
+  background: #4F6C85;
 }
 
 /* line 525, ../sass/global.sass */
 .button-secondary {
-  color: #7c689b;
+  color: #657F95;
   background: none;
-  box-shadow: 0 0 0 2px #7c689b inset;
+  box-shadow: 0 0 0 2px #657F95 inset;
   -webkit-transition: box-shadow 0.2s, color 0.2s;
   -moz-transition: box-shadow 0.2s, color 0.2s;
   -ms-transition: box-shadow 0.2s, color 0.2s;
@@ -717,8 +730,8 @@ input:focus {
 }
 /* line 530, ../sass/global.sass */
 .button-secondary:hover {
-  color: #63537d;
-  box-shadow: 0 0 0 2px #63537d inset;
+  color: #4F6C85;
+  box-shadow: 0 0 0 2px #4F6C85 inset;
 }
 
 /* adds additional padding to the bottom of an element */
@@ -739,11 +752,11 @@ input:focus {
 
 /* styles the validation errors */
 .validation--errors--label {
-  color: #7c689b;
+  color: #9B361F;
   font-size: 28px;
 }
 .validation-errors ul {
-  color: #7c689b;
+  color: #9B361F;
   padding: 15px 0 40px 10px;
 }
 

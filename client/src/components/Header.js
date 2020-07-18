@@ -1,5 +1,5 @@
 import React from 'react';
-import { NavLink } from 'react-router-dom';
+import { NavLink, Link } from 'react-router-dom';
 
 // Header class - displays the top menu bar for the application and includes buttons for 
 // signing in and signing up (if there's not an authenticated user), 
@@ -10,7 +10,9 @@ export default ({ context }) => {
 	return (
 		<div className='header'>
 			<div className='bounds'>
-				<h1 className='header--logo'>Courses</h1>
+				<h1 className='header--logo'>
+					<Link id='header' to='/'>Courses</Link>
+				</h1>
 				<nav>
 					{authUser ?
 						<React.Fragment>
