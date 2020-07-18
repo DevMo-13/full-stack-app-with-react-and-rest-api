@@ -173,7 +173,7 @@ export default class UpdateCourse extends Component {
 								</div>
 								<div className='grid-100 pad-bottom'>
 									<button className='button' type='submit'>Update Course</button>
-									<button className='button button-secondary' onClick={this.cancel}>Cancel</button>
+									<button className='button button-secondary' id='cancel' onClick={this.cancel}>Cancel</button>
 								</div>
 							</form>
 						</div>
