@@ -1,6 +1,5 @@
 import React from 'react';
 
-
 // Displays a message letting the user know that the requested page can't be found.
 export default () => (
 	<div className="bounds">

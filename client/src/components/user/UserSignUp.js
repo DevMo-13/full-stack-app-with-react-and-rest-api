@@ -1,7 +1,9 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
+import ErrorsDisplay from '../ErrorsDisplay';
 
-// Allows a user to sign up by creating a new account.
+// Allows a user to sign up by creating a new account,
+// or displays validations errors.
 export default class UserSignUp extends Component {
 	state = {
 		firstName: '',
@@ -34,7 +36,7 @@ export default class UserSignUp extends Component {
 			lastName,
 			emailAddress,
 			password,
-			confirmPassword
+			confirmPassword,
 		} = this.state; 
 		const user = {
 			firstName,
@@ -45,10 +47,10 @@ export default class UserSignUp extends Component {
 		};
 
 		context.data.createUser(user)
-			.then(errors => {
-				if (errors.length) {
-					console.log(errors);
-					this.setState({ errors });
+			.then(error => {
+				if (error.length) {
+					console.log(error);
+					this.setState({ errors: error });
 				} else {
 					console.log(`${emailAddress} is successfully signed up and authenticated!`);
 					context.actions.signIn(emailAddress, password)
@@ -83,9 +85,7 @@ export default class UserSignUp extends Component {
 			<div className='bounds'>
 				<div className='grid-33 centered signin'>
 					<h1>Sign Up</h1>
-					{ <ul>
-                		{errors.map((error, i) => <li key={i}> {error} </li>)}
-              		</ul> }
+					<ErrorsDisplay errors={errors} />
 					<div>
 						<form onSubmit={this.submit}>
 							<div>
@@ -151,22 +151,3 @@ export default class UserSignUp extends Component {
 		);
 	};
 }
-
-// function ErrorsDisplay({ errors }) {
-//   	let errorsDisplay = null;
-
-// 	if (errors.length) {
-// 		errorsDisplay = (
-// 			<div>
-// 				<h2 className="validation--errors--label">Validation errors</h2>
-// 				<div className="validation-errors">
-// 					<ul>
-// 						{errors.map((error, i) => <li key={i}>{error}</li>)}
-// 					</ul>
-// 				</div>
-// 			</div>
-// 		);
-// 	}
-
-//   	return errorsDisplay;
-// }

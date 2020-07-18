@@ -31,17 +31,17 @@ export default class CourseDetail extends Component {
 
 	// Deletes course data from database.
 	deleteCourse = () => {
-			const { context } = this.props;
-			const authUser = context.authenticatedUser;
-			const emailAddress = authUser.emailAddress;
-			const password = context.unhashedPassword;
-			const courseId = this.props.match.params.id;
+		const { context } = this.props;
+		const authUser = context.authenticatedUser;
+		const emailAddress = authUser.emailAddress;
+		const password = context.unhashedPassword;
+		const courseId = this.props.match.params.id;
 	
 		context.data.deleteCourse(courseId, emailAddress, password)
-			.then(errors => {
-				if (errors.length) {
-					console.log(errors);
-					this.setState({ errors });
+			.then(error => {
+				if (error.length) {
+					console.log(error);
+					this.props.history.push('/forbidden');
 				} else {
 					console.log('The course is successfully deleted!');
 					this.props.history.push('/');

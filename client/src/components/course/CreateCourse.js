@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import ErrorsDisplay from '../ErrorsDisplay';
 
 // Allows user to create a new course.
 export default class CreateCourse extends Component {
@@ -21,7 +22,8 @@ export default class CreateCourse extends Component {
 		});
 	};
 
-	// Saves new course data to database on submit.
+	// Saves new course data to database on submit,
+	// or displays validations errors.
 	submit = (event) => {
 		event.preventDefault();
 
@@ -45,10 +47,10 @@ export default class CreateCourse extends Component {
 		};
 
 		context.data.createCourse(course, emailAddress, password)
-			.then(errors => {
-				if (errors.length) {
-					console.log(errors);
-					this.setState({ errors });
+			.then(error => {
+				if (error.length) {
+					console.log(error);
+					this.setState({ errors: error });
 				} else {
 					console.log(`${title} is successfully added!`);
 					this.props.history.push('/');    
@@ -94,6 +96,7 @@ export default class CreateCourse extends Component {
 				<hr></hr>
 					<div className='bounds course--detail'>
 						<h1>Create Course</h1>
+						<ErrorsDisplay errors={errors} />
 						<div>
 							<form onSubmit={this.submit}>
 								<div className='grid-66'>

@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import ErrorsDisplay from '../ErrorsDisplay';
 
 // Retrieves course's details and updates any changes made by user.
 export default class UpdateCourse extends Component {
@@ -10,11 +11,12 @@ export default class UpdateCourse extends Component {
 		errors: []
 	};
 	
-	// Gets the specific course's details to save in state.
+	// Gets the specific course's details to save in state,
+	// but only if current authUser is the owner of the course.
 	componentDidMount() {
 		const { context } = this.props;
 		const courseId = this.props.match.params.id;
-		
+
 		context.data.getCourse(courseId)
 			.then(course => {
 				this.setState({ 
@@ -30,7 +32,8 @@ export default class UpdateCourse extends Component {
 			});
 	};
 
-	// Updates course's data on submit.
+	// Updates course's data on submit,
+	// or displays validations errors.
 	submit = (event) => {
 		event.preventDefault();
 
@@ -53,10 +56,10 @@ export default class UpdateCourse extends Component {
 		};
 
 		context.data.updateCourse(courseId, course, emailAddress, password)
-			.then(errors => {
-				if (errors.length) {
-					console.log(errors);
-					this.setState({ errors });
+			.then(error => {
+				if (error.length) {
+					console.log(error);
+					this.setState({ errors: error });
 				} else {
 					console.log(`${title} has been successfully updated!`);
 					this.props.history.push(`/courses/${courseId}`);  
@@ -103,6 +106,7 @@ export default class UpdateCourse extends Component {
 				<hr></hr>
 					<div className='bounds course--detail'>
 						<h1>Update Course</h1>
+						<ErrorsDisplay errors={errors} />
 						<div>
 							<form onSubmit={this.submit}>
 								<div className='grid-66'>

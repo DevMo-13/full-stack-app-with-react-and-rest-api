@@ -66,9 +66,11 @@ export default class UserSignIn extends Component {
 			<div className='bounds'>
 				<div className='grid-33 centered signin'>
 					<h1>Sign In</h1>
-					{ <ul>
-                		{errors.map((error, i) => <li key={i}> {error} </li>)}
-              		</ul> }
+					<div className="validation-errors">
+						<ul>
+							{errors.map((error, i) => <li key={i}>{error}</li>)}
+						</ul>
+					</div>
 					<div>
 						<form onSubmit={this.submit}>
 							<div>
