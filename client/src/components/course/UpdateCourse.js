@@ -32,6 +32,18 @@ export default class UpdateCourse extends Component {
 			});
 	};
 
+	// Saves input data to state.
+	change = (event) => {
+		const name = event.target.name;
+		const value = event.target.value;
+
+		this.setState(() => {
+			return {
+				[name]: value
+			};
+		});
+	};
+
 	// Updates course's data on submit,
 	// or displays validations errors.
 	submit = (event) => {
@@ -69,18 +81,6 @@ export default class UpdateCourse extends Component {
 				console.log(err);
 				this.props.history.push('/error')
 			});
-	};
-
-	// Saves input data to state.
-	change = (event) => {
-		const name = event.target.name;
-		const value = event.target.value;
-
-		this.setState(() => {
-			return {
-				[name]: value
-			};
-		});
 	};
 
 	// Redirects user to the CourseDetail route.
