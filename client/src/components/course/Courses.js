@@ -16,8 +16,7 @@ export default class Courses extends Component {
 			.then(courses => {
 				this.setState({ courses })
 			})
-			.catch(err => {
-				console.log(err);
+			.catch(() => {
 				this.props.history.push('/notfound');
 			});
 	};

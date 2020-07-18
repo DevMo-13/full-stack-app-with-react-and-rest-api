@@ -26,8 +26,7 @@ export default class UpdateCourse extends Component {
 					materialsNeeded: course.materialsNeeded,
 				});
 			})
-			.catch(err => {
-				console.log(err);
+			.catch(() => {
 				this.props.history.push('/notfound');
 			});
 	};
