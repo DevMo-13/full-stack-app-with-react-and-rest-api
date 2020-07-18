@@ -26,6 +26,22 @@ export default class UserSignUp extends Component {
 		});
 	};
 
+	// Checks if password and confirmPassword inputs match before submitting.
+	checkPasswords = (event) => {
+		event.preventDefault();
+
+		const {
+			password,
+			confirmPassword,
+		} = this.state; 
+
+		if (password !== confirmPassword) {
+			this.setState({ errors: [ 'Passwords do not match.' ] });
+		} else {
+			this.submit(event);
+		};
+	};
+
 	// Saves new user data to database on submit.
 	submit = (event) => {
 		event.preventDefault();
@@ -87,7 +103,7 @@ export default class UserSignUp extends Component {
 					<h1>Sign Up</h1>
 					<ErrorsDisplay errors={errors} />
 					<div>
-						<form onSubmit={this.submit}>
+						<form onSubmit={this.checkPasswords}>
 							<div>
 								<input 
 									id='firstName' 
