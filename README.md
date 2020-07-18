@@ -22,7 +22,7 @@ Key achievements:
 
 To get up and running with this project, download the project files, and run the following commands.
 
-#### START THE REST API
+### START THE REST API
 First, navigate to the api folder, then install the API project's dependencies using `npm`.
 
 ```
@@ -44,7 +44,7 @@ npm start
 To test the Express server, browse to the URL [http://localhost:5000/](http://localhost:5000/).
 Once the REST API application is started, leave the app running in the background.
 
-#### START THE REACT APPLICATION
+### START THE REACT APPLICATION
 Now, navigate to the client folder, and then install the React project's dependencies using `npm`.
 
 ```
