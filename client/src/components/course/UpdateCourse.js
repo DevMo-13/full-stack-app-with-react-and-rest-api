@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import ErrorsDisplay from '../ErrorsDisplay';
-import Forbidden from '../Forbidden';
 
 // Retrieves course's details and updates any changes made by user.
 // If user is not the owner of the course, user is redirected to the forbidden route.
@@ -10,7 +9,6 @@ export default class UpdateCourse extends Component {
 		description: '',
 		estimatedTime: '',
 		materialsNeeded: '',
-		courseUser: '',
 		errors: []
 	};
 	
@@ -18,20 +16,27 @@ export default class UpdateCourse extends Component {
 	componentDidMount() {
 		const { context } = this.props;
 		const courseId = this.props.match.params.id;
+		const authUser = context.authenticatedUser;
 
 		context.data.getCourse(courseId)
 			.then(course => {
-				this.setState({ 
-					title: course.title,
-					description: course.description,
-					estimatedTime: course.estimatedTime,
-					materialsNeeded: course.materialsNeeded,
-					courseUser: course.user
-				});
+				if (course.message) {
+					console.log(course.message);
+					this.props.history.push('/notfound');
+				} else if (authUser.id !== course.user.id) {
+					this.props.history.push('/forbidden');
+				} else {
+					this.setState({ 
+						title: course.title,
+						description: course.description,
+						estimatedTime: course.estimatedTime,
+						materialsNeeded: course.materialsNeeded
+					});
+				};
 			})
 			.catch((error) => {
 				console.log(error);
-				this.props.history.push('/notfound');
+				this.props.history.push('/error');
 			});
 	};
 
@@ -98,7 +103,6 @@ export default class UpdateCourse extends Component {
 			description,
 			estimatedTime,
 			materialsNeeded,
-			courseUser,
 			errors
 		} = this.state;
 		const { context } = this.props;
@@ -107,7 +111,6 @@ export default class UpdateCourse extends Component {
 		return (
 			<React.Fragment>
 				<hr></hr>
-				{authUser.id === courseUser.id ?
 					<div className='bounds course--detail'>
 						<h1>Update Course</h1>
 						<ErrorsDisplay errors={errors} />
@@ -178,9 +181,6 @@ export default class UpdateCourse extends Component {
 							</form>
 						</div>
 					</div>
-				:
-					<Forbidden />
-				}
 			</React.Fragment>
 		);
     };

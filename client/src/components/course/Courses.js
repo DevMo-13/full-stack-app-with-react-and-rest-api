@@ -13,11 +13,16 @@ export default class Courses extends Component {
 		
 		context.data.getCourses()
 			.then(courses => {
-				this.setState({ courses })
+				if (courses.message) {
+					console.log(courses.message);
+					this.props.history.push('/notfound');
+				} else {
+					this.setState({ courses })
+				};
 			})
 			.catch((error) => {
 				console.log(error);
-				this.props.history.push('/notfound');
+				this.props.history.push('/error');
 			});
 	};
 

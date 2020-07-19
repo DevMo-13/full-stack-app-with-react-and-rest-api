@@ -18,14 +18,19 @@ export default class CourseDetail extends Component {
 		
 		context.data.getCourse(courseId)
 			.then(course => {
-				this.setState({ 
-					course, 
-					user: course.user
-				});
+				if (course.message) {
+					console.log(course.message);
+					this.props.history.push('/notfound');
+				} else {
+					this.setState({ 
+						course, 
+						user: course.user
+					});
+				};
 			})
 			.catch((error) => {
 				console.log(error);
-				this.props.history.push('/notfound');
+				this.props.history.push('/error');
 			});
 	};
 

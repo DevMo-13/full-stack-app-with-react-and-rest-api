@@ -62,6 +62,10 @@ export default class Data {
 		
 		if (response.status === 200) {
 			return response.json().then(data => data);
+		} else if (response.status === 404) {
+			return response.json().then(data => {
+				return data;
+			});
 		} else {
 			throw new Error();
 		};
@@ -73,6 +77,10 @@ export default class Data {
 		
 		if (response.status === 200) {
 			return response.json().then(data => data);
+		} else if (response.status === 404) {
+			return response.json().then(data => {
+				return data;
+			});
 		} else {
 			throw new Error();
 		};
@@ -108,7 +116,7 @@ export default class Data {
 		};
 	};
 
-	// DELETE a course's from the database.
+	// DELETE a course from the database.
 	async deleteCourse(courseId, emailAddress, password) {
 		const response = await this.api(`/courses/${courseId}`, 'DELETE', null, true, { emailAddress, password });
 		
